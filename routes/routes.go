@@ -22,6 +22,12 @@ func RoutesSetup() {
 	// Initialize routes
 	initializeRoutes(router)
 
+	/*
+	   Process the templates at the start so that they don't have to be
+	   loaded from the disk again. This makes serving HTML pages very fast.
+	*/
+	//router.LoadHTMLGlob("templates/*")
+
 	// Run the http server
 	if err := router.Run(port); err != nil {
 		log.Fatalln("Could not run server: ", err.Error())
@@ -40,7 +46,7 @@ func initializeRoutes(router *gin.Engine) {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "Page not found"})
 	})
 
-	router.POST("/send", gin.WrapF(service.Index))
+	router.GET("/send", gin.WrapF(service.Index))
 	router.POST("/", gin.WrapF(service.Index))
 
 }
