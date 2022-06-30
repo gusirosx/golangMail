@@ -1,14 +1,23 @@
 package types
 
+// Mail struct to hold the submitted form.
 type Mail struct {
-	Sender  string
-	To      []string
-	Cc      []string
-	Bcc     []string
-	Subject string
-	Body    string
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Email     string `json:"emailName"`
+	Phone     string `json:"phone"`
+	Subject   string `json:"subject"`
+	Body      string `json:"body"`
 }
 
+// type  struct {
+// 	Sender  string
+// 	To      []string
+// 	Cc      []string
+// 	Bcc     []string
+// 	Subject string
+// 	Body    string
+// }
 // func main2() {
 
 // 	from := "gsrodrigues280@example.com"
