@@ -16,33 +16,33 @@ type Mail struct {
 	Errors    map[string]string
 }
 
-func (fv *Mail) Validate() bool {
+func (mail *Mail) Validate() bool {
 	// Map will not be empty if errors are present.
-	fv.Errors = make(map[string]string)
+	mail.Errors = make(map[string]string)
 	// If the first name is empty, add to errors map.
-	if strings.TrimSpace(fv.FirstName) == "" {
-		fv.Errors["FirstName"] = "First name cannot be empty."
+	if strings.TrimSpace(mail.FirstName) == "" {
+		mail.Errors["FirstName"] = "First name cannot be empty."
 	}
-	if strings.TrimSpace(fv.LastName) == "" {
-		fv.Errors["LastName"] = "Last name cannot be empty."
+	if strings.TrimSpace(mail.LastName) == "" {
+		mail.Errors["LastName"] = "Last name cannot be empty."
 	}
 	// If email is not empty, check if it's the correct format.
-	if strings.TrimSpace(fv.Email) != "" {
-		re := regexp.MustCompile(`.+@.+\\..+`)
-		matched := re.Match([]byte(fv.Email))
+	if strings.TrimSpace(mail.Email) != "" {
+		re := regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
+		matched := re.Match([]byte(mail.Email))
 		if !matched {
-			fv.Errors["EmailFormat"] = "Email is not valid."
+			mail.Errors["EmailFormat"] = "Email is not valid."
 		}
 	} else {
-		fv.Errors["Email"] = "Email cannot be empty."
+		mail.Errors["Email"] = "Email cannot be empty."
 	}
 
-	if strings.TrimSpace(fv.Subject) == "" {
-		fv.Errors["Subject"] = "Subject cannot be empty."
+	if strings.TrimSpace(mail.Subject) == "" {
+		mail.Errors["Subject"] = "Subject cannot be empty."
 	}
-	if strings.TrimSpace(fv.Body) == "" {
-		fv.Errors["Body"] = "Body cannot be empty."
+	if strings.TrimSpace(mail.Body) == "" {
+		mail.Errors["Body"] = "Body cannot be empty."
 	}
 	// Return empty map (assuming it's empty/no errors)
-	return len(fv.Errors) == 0
+	return len(mail.Errors) == 0
 }

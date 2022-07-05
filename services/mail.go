@@ -67,14 +67,3 @@ func createStringOfSlice(emails []string) (toList string) {
 	}
 	return toList[0 : len(toList)-2]
 }
-
-type formValidate struct {
-	FirstName string
-	LastName  string
-	Email     string
-	Phone     string
-	Subject   string
-	Body      string
-	Errors    map[string]string
-	SentFlag  bool
-}

@@ -19,7 +19,11 @@ func ContactUs(ctx *gin.Context) {
 		return
 	}
 
-	//contact.Validate()
+	// Check for errors.
+	if !contact.Validate() {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": contact.Errors})
+		return
+	}
 
 	if err := services.ContactUs(contact); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
