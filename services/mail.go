@@ -29,7 +29,6 @@ func ContactUs(mail types.Mail) error {
 	// Receiver email address.
 	to := []string{
 		"gusirosx@example.com",
-		"gsrodrigues@example.com",
 	}
 
 	// Authentication information for the sender email address.
@@ -46,6 +45,7 @@ func ContactUs(mail types.Mail) error {
 	return nil
 }
 
+// https://github.com/mlabouardy/go-html-email
 func buildMessage(mail types.Mail, toList []string) string {
 	//msg := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\r\n"
 	msg := fmt.Sprintf("From: %s\r\n", mail.Email)
